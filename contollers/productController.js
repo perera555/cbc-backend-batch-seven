@@ -49,7 +49,7 @@ export async function getProducts(req, res) {
 }
 
 export async function deleteProduct(req, res) {
-    if (isAdmin(req)) {
+    if (!isAdmin(req)) {
         res.status(401).json({
             message: "you are not authorized to Delete a product"
         })
@@ -81,7 +81,7 @@ export async function deleteProduct(req, res) {
 }
 export async function updateProduct(req, res) {
 
-    if (isAdmin(req)) {
+    if (!isAdmin(req)) {
         res.status(401).json({
             message: "you are not authorized to Update a product"
         })
@@ -114,7 +114,7 @@ export async function getProductID(req,res){
                 productID : productID
             }
         )
-        if(!product ==null){
+        if(product ==null){
             res.status(404).json({
                 message:"product not found"
             })
