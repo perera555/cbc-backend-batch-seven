@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 
+
 export function getUsers(req, res) {
     User.find().then((users) => {
         res.json(users)

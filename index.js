@@ -3,12 +3,18 @@ import mongoose from 'mongoose';
 import studentRouter from './routers/studentRouter.js';
 import userRouter from './routers/userRouter.js';
 import jwt from 'jsonwebtoken';
+import cors from 'cors';
 import productRouter from './routers/productRoutes.js';
+import dotenv from 'dotenv';
 
 
+
+dotenv.config();
 
 
 const app = express();
+app.use(cors());
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -39,7 +45,7 @@ app.use((req, res, next) => {
 })
 
 
-const connectionString = "mongodb+srv://admin:123@cluster0.yijytmw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const connectionString = process.env.MONGO_URI;
 mongoose.connect(connectionString).then(() => {
     console.log("Connected to the database");
 })
