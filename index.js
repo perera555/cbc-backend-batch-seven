@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
     if (token != null) {
         token = token.replace("Bearer ", "");
-        jwt.verify(token, "jwt-secret", (err, decoded) => {
+        jwt.verify(token,process.env.JWT_SECRET, (err, decoded) => {
             if (decoded == null) {
                 res.json({
                     message: "Invalid Token please login again"
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 })
 
 
-const connectionString = process.env.MONGO_URI;
+const connectionString = process.env.MONGO_URl;
 mongoose.connect(connectionString).then(() => {
     console.log("Connected to the database");
 })
@@ -53,9 +53,9 @@ mongoose.connect(connectionString).then(() => {
         console.log("Error connecting to the database", err);
     })
 
-app.use('/students', studentRouter);
-app.use('/users', userRouter);
-app.use('/products', productRouter);
+app.use('/api/students', studentRouter);
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
 
 
 
